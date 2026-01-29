@@ -19,21 +19,28 @@ def get_animals_data(animals_data):
         output += '<li class="cards__item">'
         name = animal.get("name")
         if name:
-            output += f"Name: {name}<br/>\n"
+            output += f'<div class="card__title">{name}</div><br/>\n'
 
+        output += '  <p class="card__text">\n'
         characteristics = animal.get("characteristics", {})
         diet = characteristics.get("diet")
         if diet:
-           output += f"Diet: {diet}<br/>\n"
+           output += f"<strong>Diet:</strong> {diet}<br/>\n"
 
-        location = characteristics.get("location")
-        if location and len(location) > 0:
-            output += f"Location: {location[0]}<br/>\n"
+        location_data = animal.get("locations") or characteristics.get("locations") or characteristics.get("location")
+        if location_data:
+            if isinstance(location_data, list) and len(location_data) > 0:
+                main_location = location_data[0]
+            else:
+                main_location = location_data
+
+            output += f'<strong>Location:</strong> {main_location}</br>\n'
 
         type_info = characteristics.get("type")
         if type_info:
-            output += f"Type: {type_info}<br/>\n"
-        output += '<li>'
+            output += f"<strong>Type:</strong> {type_info}<br/>\n"
+        output += '</p>\n'
+        output += '<li>\n'
     return output
 
 
