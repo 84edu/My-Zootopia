@@ -16,23 +16,24 @@ def get_animals_data(animals_data):
     """A long string with all animals data"""
     output = ""
     for animal in animals_data:
+        output += '<li class="cards__item">'
         name = animal.get("name")
         if name:
-            output += f"Name: {name}\n"
+            output += f"Name: {name}<br/>\n"
 
         characteristics = animal.get("characteristics", {})
         diet = characteristics.get("diet")
         if diet:
-           output += f"Diet: {diet}\n"
+           output += f"Diet: {diet}<br/>\n"
 
         location = characteristics.get("location")
         if location and len(location) > 0:
-            output += f"Location: {location[0]}\n"
+            output += f"Location: {location[0]}<br/>\n"
 
         type_info = characteristics.get("type")
         if type_info:
-            output += f"Type: {type_info}\n"
-
+            output += f"Type: {type_info}<br/>\n"
+        output += '<li>'
     return output
 
 
